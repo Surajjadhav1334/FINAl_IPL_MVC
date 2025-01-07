@@ -12,7 +12,7 @@
 	<groupId>com.tka</groupId>
 	<artifactId>Final_IPL_MVC</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Final_IPL_API</name>
+	<name>Final_IPL_MVC</name>
 	<description>Demo project for Spring Boot</description>
 	<url />
 	<licenses>
