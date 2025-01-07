@@ -10,7 +10,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.tka</groupId>
-	<artifactId>Final_IPL_API</artifactId>
+	<artifactId>Final_IPL_MVC</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Final_IPL_API</name>
 	<description>Demo project for Spring Boot</description>
