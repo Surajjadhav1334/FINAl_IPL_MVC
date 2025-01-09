@@ -2,6 +2,8 @@ package com.tka.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tka.entity.Team;
 import com.tka.service.TeamService;
 
-@RestController
+@Controller
 @RequestMapping("/teams")
 public class TeamController {
 
@@ -32,8 +34,10 @@ public class TeamController {
     }
 
     @GetMapping("/allteams")
-    public List<Team> getAllTeams() {
-        return teamService.getAllTeams();
+    public String getAllTeams(Model model) {
+         List<Team> allTeams = teamService.getAllTeams();
+         model.addAttribute("allteams", allTeams);
+         return "team";
     }
     
     @PutMapping("/updateteam")
@@ -42,9 +46,10 @@ public class TeamController {
     	return teamService.updateteam(team);
     }
     
-    @DeleteMapping("/deleteteam/{id}")
+    @RequestMapping("/deleteteam/{id}")
     public String deleteteam(@PathVariable("id") Long id)
     {
-    	return teamService.deleteteam(id);
+    	 String deleteteam = teamService.deleteteam(id);
+    	 return "team";
     }
 }

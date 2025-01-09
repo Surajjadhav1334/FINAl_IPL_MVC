@@ -69,4 +69,12 @@ public class Matches {
     public void setTeam2(Team team2) {
         this.team2 = team2;
     }
+
+//	@Override
+//	public String toString() {
+//		return "Matches [id=" + id + ", matchDate=" + matchDate + ", location=" + location + ", team1=" + team1
+//				+ ", team2=" + team2 + "]";
+//	}
+    
+    
 }

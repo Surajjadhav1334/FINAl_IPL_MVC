@@ -2,6 +2,8 @@ package com.tka.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,26 +16,37 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tka.entity.Player;
 import com.tka.service.PlayerService;
 
-@RestController
+@Controller
 @RequestMapping("/players")
 public class PlayerController {
 
     @Autowired
     private PlayerService playerService;
+    
+//    @GetMapping("/add")
+//    public String showAddPlayerForm(Model model) {
+//        model.addAttribute("player", new Player()); // Add an empty Player object for binding
+//        return "add player"; // JSP file name that contains the form
+//    }
 
-    @PostMapping
-    public Player createPlayer(@RequestBody Player player) {
-        return playerService.createPlayer(player);
+
+    @PostMapping("/add")
+    public String createPlayer(Player player) {
+        playerService.createPlayer(player); // Save the player using the service layer
+        return "players"; // Redirect to the list of players
     }
+
 
     @GetMapping("/{id}")
     public Player getPlayerById(@PathVariable Long id) {
         return playerService.getPlayerById(id);
     }
 
-    @GetMapping
-    public List<Player> getAllPlayers() {
-        return playerService.getAllPlayers();
+    @GetMapping("/getallplayers")
+    public String getAllPlayers( Model model) {
+    	List<Player> allPlayers = playerService.getAllPlayers();
+    	model.addAttribute("allPlayers", allPlayers);
+        return "players";
     }
     
     @PutMapping("/updateplayer")
@@ -42,10 +55,11 @@ public class PlayerController {
     	return playerService.updateplayer(player);
     }
     
-    @DeleteMapping("/deleteplayer/{id}")
+    @RequestMapping("/deleteplayer/{id}")
      public String deleteplayer(@PathVariable("id") Long id)
      {
-    	return playerService.deleteplayer(id);
+    	 playerService.deleteplayer(id);
+    	 return "players";
      }
     
 }

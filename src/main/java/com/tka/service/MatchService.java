@@ -32,9 +32,9 @@ public class MatchService {
     	return matchDao.updatematch(matches);
     }
     
-    public String deletematch( Long ud)
+    public String deletematch(Long id )
     {
-    	return matchDao.deletematch(ud);
+    	return matchDao.deletematch(id);
     }
     
 }

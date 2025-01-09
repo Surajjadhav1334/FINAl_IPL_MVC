@@ -4,6 +4,8 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,13 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tka.entity.Matches;
 import com.tka.entity.Team;
 import com.tka.service.MatchService;
 
-@RestController
+@Controller
 @RequestMapping("/matches")
 public class MatchController {
 
@@ -34,21 +37,26 @@ public class MatchController {
         return matchService.getMatchById(id);
     }
 
-    @GetMapping
-    public List<Matches> getAllMatches() {
-        return matchService.getAllMatches();
+    @GetMapping("/allmatches")
+    public String getAllMatches(Model model) {
+         List<Matches> allMatches = matchService.getAllMatches();
+         model.addAttribute("allmatches", allMatches);
+         return "match";
     }
     
     @PutMapping("/updatematch")
     public String updatematch(@RequestBody Matches matches)
     {
     	return matchService.updatematch(matches);
+    	 
     }
     
-    @DeleteMapping("/deletematch/{id}")
+    @RequestMapping("/deletematch/{id}")
     public String deletematch(@PathVariable("id") Long id)
     {
-		return matchService.deletematch(id);
+    	System.err.println("in delete controller");
+		 String deletematch = matchService.deletematch(id); 
+		 return "match";
     }
     
     

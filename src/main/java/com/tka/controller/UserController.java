@@ -1,4 +1,4 @@
-package com.tka.controller;
+ package com.tka.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,16 +30,8 @@ public class UserController {
 	public String logincheck(@ModelAttribute User user, Model model)
 	{
 		 boolean correct = loginservice.logincheck(user);
-		 System.err.println(correct);
-		 
-		 if (correct) {
-			 List<Sport> splayer = new ArrayList<Sport>();
-			 splayer.add(new Sport(1, "Suraj", 20));
-			 splayer.add(new Sport(2, "Kaushal", 30));
-			 splayer.add(new Sport(3, "Santosh", 40));
-			 splayer.add(new Sport(4, "Abhay", 20));
-			 
-			 model.addAttribute("Sportsperson", splayer);
+		 System.err.println(correct); 
+		 if (correct) { 
 			return "player";
 		}
 		 else
@@ -47,5 +39,6 @@ public class UserController {
 			 model.addAttribute("error", "Invalid username and password");
 			 return "login";
 		 }
+		 
 	}
 }
